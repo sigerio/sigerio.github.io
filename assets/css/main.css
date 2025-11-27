@@ -256,6 +256,14 @@ body {
   color: var(--accent-color);
 }
 
+.post-toc .toc-h3 {
+  padding-left: 1rem;
+}
+
+.post-toc .toc-item {
+  margin: 0.4rem 0;
+}
+
 /* 文章内容样式 */
 .post-content h1, .post-content h2, .post-content h3,
 .post-content h4, .post-content h5, .post-content h6 {

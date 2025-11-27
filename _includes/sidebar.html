@@ -1,12 +1,12 @@
 <nav class="sidebar-nav">
   <h3>学科分类</h3>
   <ul class="category-list">
-    {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
-    {% for cat in categories %}
+    {% assign sorted_categories = site.categories | sort: "category_name" %}
+    {% for cat_page in sorted_categories %}
     <li>
-      <a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a>
+      <a href="{{ cat_page.url | relative_url }}">{{ cat_page.category_name }}</a>
       <span class="count">
-        ({{ site.posts | where: "category", cat | size }})
+        ({{ site.posts | where: "category", cat_page.category_name | size }})
       </span>
     </li>
     {% endfor %}

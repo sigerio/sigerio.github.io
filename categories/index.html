@@ -6,15 +6,15 @@ title: 全部分类
   <h1>全部分类</h1>
   
   <div class="category-list-full">
-    {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
-    {% for cat in categories %}
+    {% assign sorted_categories = site.categories | sort: "category_name" %}
+    {% for cat_page in sorted_categories %}
     <section class="category-section">
       <h2>
-        <a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a>
-        <span class="count">({{ site.posts | where: "category", cat | size }})</span>
+        <a href="{{ cat_page.url | relative_url }}">{{ cat_page.category_name }}</a>
+        <span class="count">({{ site.posts | where: "category", cat_page.category_name | size }})</span>
       </h2>
       <ul class="post-list">
-        {% assign cat_posts = site.posts | where: "category", cat %}
+        {% assign cat_posts = site.posts | where: "category", cat_page.category_name %}
         {% for post in cat_posts limit:5 %}
         <li>
           <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
@@ -22,7 +22,7 @@ title: 全部分类
         </li>
         {% endfor %}
         {% if cat_posts.size > 5 %}
-        <li><a href="{{ '/categories/' | append: cat | relative_url }}">查看全部 {{ cat_posts.size }} 篇 →</a></li>
+        <li><a href="{{ cat_page.url | relative_url }}">查看全部 {{ cat_posts.size }} 篇 →</a></li>
         {% endif %}
       </ul>
     </section>

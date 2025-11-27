@@ -9,11 +9,11 @@ title: 首页
   <section class="categories-overview">
     <h2>学科分类</h2>
     <div class="category-cards">
-      {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
-      {% for cat in categories %}
+      {% assign sorted_categories = site.categories | sort: "category_name" %}
+      {% for cat_page in sorted_categories %}
       <div class="category-card">
-        <h3><a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a></h3>
-        <p>{{ site.posts | where: "category", cat | size }} 篇笔记</p>
+        <h3><a href="{{ cat_page.url | relative_url }}">{{ cat_page.category_name }}</a></h3>
+        <p>{{ site.posts | where: "category", cat_page.category_name | size }} 篇笔记</p>
       </div>
       {% endfor %}
     </div>

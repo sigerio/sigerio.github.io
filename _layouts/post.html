@@ -14,11 +14,11 @@ layout: default
     </div>
   </header>
 
-  <!-- 文章目录 -->
+  <!-- 文章目录 - JavaScript 自动生成 -->
   {% if page.toc != false %}
-  <nav class="post-toc">
+  <nav class="post-toc" id="toc-container">
     <h3>目录</h3>
-    {{ content | toc_only }}
+    <ul id="toc-list"></ul>
   </nav>
   {% endif %}
 

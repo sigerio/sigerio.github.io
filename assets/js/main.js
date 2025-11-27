@@ -1,3 +1,67 @@
+// 文章目录自动生成功能
+(function() {
+  'use strict';
+
+  // 生成文章目录
+  function generateTOC() {
+    var content = document.querySelector('.post-content');
+    var tocContainer = document.getElementById('toc-container');
+    var tocList = document.getElementById('toc-list');
+    
+    // 如果没有目录容器或文章内容，直接返回
+    if (!content || !tocContainer || !tocList) return;
+    
+    // 获取所有 h2 和 h3 标题
+    var headings = content.querySelectorAll('h2, h3');
+    
+    // 如果没有标题，隐藏目录区域
+    if (headings.length === 0) {
+      tocContainer.style.display = 'none';
+      return;
+    }
+    
+    // 为每个标题添加 id（如果没有）并生成目录项
+    var tocHTML = '';
+    headings.forEach(function(heading, index) {
+      // 生成唯一 id
+      if (!heading.id) {
+        heading.id = 'heading-' + index;
+      }
+      
+      // 判断层级
+      var isH3 = heading.tagName.toLowerCase() === 'h3';
+      var className = isH3 ? 'toc-item toc-h3' : 'toc-item toc-h2';
+      
+      tocHTML += '<li class="' + className + '">';
+      tocHTML += '<a href="#' + heading.id + '">' + heading.textContent + '</a>';
+      tocHTML += '</li>';
+    });
+    
+    tocList.innerHTML = tocHTML;
+    
+    // 添加平滑滚动
+    tocList.addEventListener('click', function(e) {
+      if (e.target.tagName.toLowerCase() === 'a') {
+        e.preventDefault();
+        var targetId = e.target.getAttribute('href').substring(1);
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // 更新 URL hash
+          history.pushState(null, null, '#' + targetId);
+        }
+      }
+    });
+  }
+  
+  // 页面加载完成后生成目录
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', generateTOC);
+  } else {
+    generateTOC();
+  }
+})();
+
 // 站内搜索功能
 (function() {
   'use strict';
