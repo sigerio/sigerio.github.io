@@ -257,10 +257,11 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: fixed;
   top: 80px;
-  right: calc((100vw - 1200px) / 2);
+  right: max(1rem, calc((100vw - 1200px) / 2));
   width: 220px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  z-index: 50;
   /* Firefox 滚动条样式 */
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) #f1f1f1;
