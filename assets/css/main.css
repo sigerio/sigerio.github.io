@@ -255,10 +255,34 @@ body {
   padding: 1rem 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky;
+  position: fixed;
   top: 80px;
+  right: calc((100vw - 1200px) / 2);
+  width: 220px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  /* Firefox 滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) #f1f1f1;
+}
+
+/* Webkit 滚动条样式 */
+.post-toc::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post-toc::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.post-toc::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+.post-toc::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }
 
 .post-toc h3 {
@@ -430,7 +454,8 @@ body {
 /* 响应式设计 */
 @media (max-width: 1024px) {
   /* 中等屏幕：隐藏右侧目录 */
-  .post-toc-sidebar {
+  .post-toc-sidebar,
+  .post-toc {
     display: none;
   }
   
