@@ -1,0 +1,26 @@
+---
+layout: default
+title: 搜索
+---
+<div class="search-page">
+  <h1>站内搜索</h1>
+  <div class="search-container">
+    <input type="text" id="search-input-page" placeholder="输入关键词搜索..." autofocus>
+  </div>
+  <div id="search-results"></div>
+</div>
+
+<!-- 搜索数据 -->
+<script>
+window.searchData = [
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "category": {{ post.category | jsonify }},
+    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    "content": {{ post.content | strip_html | truncate: 500 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+</script>

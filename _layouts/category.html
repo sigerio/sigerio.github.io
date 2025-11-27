@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<div class="category-page">
+  <h1 class="category-title">{{ page.title }}</h1>
+  <p class="category-description">{{ page.description }}</p>
+  
+  <ul class="post-list">
+    {% assign category_posts = site.posts | where: "category", page.category_name %}
+    {% for post in category_posts %}
+    <li class="post-item">
+      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <a href="{{ post.url | relative_url }}" class="post-link">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  {% if category_posts.size == 0 %}
+  <p class="no-posts">该分类下暂无文章</p>
+  {% endif %}
+</div>

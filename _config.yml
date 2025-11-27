@@ -1,0 +1,56 @@
+# 网站基本配置
+title: 学习笔记博客
+description: 记录我的学习笔记 - Linux、STM32、ESP32、Python 等
+author: sigerio
+url: "https://sigerio.github.io"
+baseurl: ""
+
+# 构建配置
+markdown: kramdown
+highlighter: rouge
+
+# Kramdown 配置（支持目录生成）
+kramdown:
+  input: GFM
+  auto_ids: true
+  toc_levels: 1..3
+  syntax_highlighter: rouge
+
+# 永久链接格式
+permalink: /:categories/:title/
+
+# 分类配置
+collections:
+  categories:
+    output: true
+    permalink: /categories/:name/
+
+# 默认值配置
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "categories"
+    values:
+      layout: "category"
+
+# 分页配置
+paginate: 10
+paginate_path: "/page:num/"
+
+# 排除文件
+exclude:
+  - README.md
+  - AGENTS.md
+  - openspec
+  - .factory
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

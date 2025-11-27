@@ -1,0 +1,38 @@
+---
+layout: default
+title: 首页
+---
+<div class="home">
+  <h1>欢迎来到我的学习笔记</h1>
+  <p class="lead">这里记录了我在 Linux、STM32、ESP32、Python 等领域的学习心得。</p>
+  
+  <section class="categories-overview">
+    <h2>学科分类</h2>
+    <div class="category-cards">
+      {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
+      {% for cat in categories %}
+      <div class="category-card">
+        <h3><a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a></h3>
+        <p>{{ site.posts | where: "category", cat | size }} 篇笔记</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+  <section class="recent-posts">
+    <h2>最新笔记</h2>
+    <ul class="post-list">
+      {% for post in site.posts limit:10 %}
+      <li class="post-item">
+        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        <span class="post-category">{{ post.category }}</span>
+        <a href="{{ post.url | relative_url }}" class="post-link">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    
+    {% if site.posts.size == 0 %}
+    <p>暂无笔记，开始写第一篇吧！</p>
+    {% endif %}
+  </section>
+</div>

@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="post-date">{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.category %}
+      <span class="post-category">
+        <a href="{{ '/categories/' | append: page.category | relative_url }}">{{ page.category }}</a>
+      </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- 文章目录 -->
+  {% if page.toc != false %}
+  <nav class="post-toc">
+    <h3>目录</h3>
+    {{ content | toc_only }}
+  </nav>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    {% if page.tags %}
+    <div class="post-tags">
+      {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </footer>
+</article>

@@ -1,0 +1,23 @@
+<nav class="sidebar-nav">
+  <h3>学科分类</h3>
+  <ul class="category-list">
+    {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
+    {% for cat in categories %}
+    <li>
+      <a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a>
+      <span class="count">
+        ({{ site.posts | where: "category", cat | size }})
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  <h3>最近文章</h3>
+  <ul class="recent-posts">
+    {% for post in site.posts limit:5 %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>

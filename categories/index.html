@@ -1,0 +1,31 @@
+---
+layout: default
+title: 全部分类
+---
+<div class="categories-page">
+  <h1>全部分类</h1>
+  
+  <div class="category-list-full">
+    {% assign categories = "Linux,STM32,ESP32,Python" | split: "," %}
+    {% for cat in categories %}
+    <section class="category-section">
+      <h2>
+        <a href="{{ '/categories/' | append: cat | relative_url }}">{{ cat }}</a>
+        <span class="count">({{ site.posts | where: "category", cat | size }})</span>
+      </h2>
+      <ul class="post-list">
+        {% assign cat_posts = site.posts | where: "category", cat %}
+        {% for post in cat_posts limit:5 %}
+        <li>
+          <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+        {% if cat_posts.size > 5 %}
+        <li><a href="{{ '/categories/' | append: cat | relative_url }}">查看全部 {{ cat_posts.size }} 篇 →</a></li>
+        {% endif %}
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
+</div>
