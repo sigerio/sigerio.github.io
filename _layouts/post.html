@@ -1,38 +1,42 @@
 ---
 layout: default
 ---
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <div class="post-meta">
-      <span class="post-date">{{ page.date | date: "%Y年%m月%d日" }}</span>
-      {% if page.category %}
-      <span class="post-category">
-        <a href="{{ '/categories/' | append: page.category | relative_url }}">{{ page.category }}</a>
-      </span>
+<div class="post-wrapper">
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="post-meta">
+        <span class="post-date">{{ page.date | date: "%Y年%m月%d日" }}</span>
+        {% if page.category %}
+        <span class="post-category">
+          <a href="{{ '/categories/' | append: page.category | relative_url }}">{{ page.category }}</a>
+        </span>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+      {% if page.tags %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
       {% endif %}
-    </div>
-  </header>
+    </footer>
+  </article>
 
-  <!-- 文章目录 - JavaScript 自动生成 -->
+  <!-- 文章目录 - 右侧固定 -->
   {% if page.toc != false %}
-  <nav class="post-toc" id="toc-container">
-    <h3>目录</h3>
-    <ul id="toc-list"></ul>
-  </nav>
+  <aside class="post-toc-sidebar">
+    <nav class="post-toc" id="toc-container">
+      <h3>目录</h3>
+      <ul id="toc-list"></ul>
+    </nav>
+  </aside>
   {% endif %}
-
-  <div class="post-content">
-    {{ content }}
-  </div>
-
-  <footer class="post-footer">
-    {% if page.tags %}
-    <div class="post-tags">
-      {% for tag in page.tags %}
-      <span class="tag">{{ tag }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </footer>
-</article>
+</div>

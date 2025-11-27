@@ -11,10 +11,10 @@ title: 首页
     <div class="category-cards">
       {% assign sorted_categories = site.categories | sort: "category_name" %}
       {% for cat_page in sorted_categories %}
-      <div class="category-card">
-        <h3><a href="{{ cat_page.url | relative_url }}">{{ cat_page.category_name }}</a></h3>
+      <a href="{{ cat_page.url | relative_url }}" class="category-card">
+        <h3>{{ cat_page.category_name }}</h3>
         <p>{{ site.posts | where: "category", cat_page.category_name | size }} 篇笔记</p>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </section>

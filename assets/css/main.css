@@ -150,20 +150,30 @@ body {
 }
 
 .category-card {
+  display: block;
   background: var(--bg-color);
   padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .category-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.category-card h3 a {
+.category-card h3 {
   color: var(--primary-color);
-  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.category-card p {
+  color: var(--text-color);
+  margin: 0;
 }
 
 /* 文章列表样式 */
@@ -201,11 +211,25 @@ body {
 }
 
 /* 文章页面样式 */
+.post-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
 .post {
+  flex: 1;
+  min-width: 0;
   background: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 右侧目录边栏 */
+.post-toc-sidebar {
+  width: 220px;
+  flex-shrink: 0;
 }
 
 .post-header {
@@ -227,10 +251,14 @@ body {
 
 /* 文章目录样式 */
 .post-toc {
-  background: var(--bg-color);
+  background: white;
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 .post-toc h3 {
@@ -400,6 +428,17 @@ body {
 }
 
 /* 响应式设计 */
+@media (max-width: 1024px) {
+  /* 中等屏幕：隐藏右侧目录 */
+  .post-toc-sidebar {
+    display: none;
+  }
+  
+  .post-wrapper {
+    display: block;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
