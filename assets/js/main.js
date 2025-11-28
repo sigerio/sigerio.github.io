@@ -1,3 +1,173 @@
+// 自动超链接功能
+(function() {
+  'use strict';
+
+  function autoLinkUrls() {
+    var content = document.querySelector('.post-content');
+    if (!content) return;
+
+    // URL匹配正则（排除中文标点）
+    var urlPattern = /(https?:\/\/[^\s<>\[\]()，。！？、；：""'']+)/g;
+
+    // 递归遍历文本节点
+    function walkTextNodes(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var text = node.textContent;
+        if (urlPattern.test(text)) {
+          // 检查父节点是否已经是链接或代码块
+          var parent = node.parentElement;
+          if (parent && (
+            parent.tagName === 'A' ||
+            parent.tagName === 'CODE' ||
+            parent.tagName === 'PRE' ||
+            parent.closest('a') ||
+            parent.closest('pre') ||
+            parent.closest('code')
+          )) {
+            return;
+          }
+
+          // 替换URL为链接
+          var fragment = document.createDocumentFragment();
+          var lastIndex = 0;
+          urlPattern.lastIndex = 0;
+          var match;
+
+          while ((match = urlPattern.exec(text)) !== null) {
+            // 添加匹配前的文本
+            if (match.index > lastIndex) {
+              fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+            }
+            // 创建链接
+            var link = document.createElement('a');
+            link.href = match[1];
+            link.textContent = match[1];
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            fragment.appendChild(link);
+            lastIndex = urlPattern.lastIndex;
+          }
+
+          // 添加剩余文本
+          if (lastIndex < text.length) {
+            fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+          }
+
+          node.parentNode.replaceChild(fragment, node);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // 跳过特定标签
+        var tagName = node.tagName;
+        if (tagName === 'A' || tagName === 'CODE' || tagName === 'PRE' || tagName === 'SCRIPT' || tagName === 'STYLE') {
+          return;
+        }
+        // 遍历子节点（复制数组避免修改时出错）
+        Array.from(node.childNodes).forEach(walkTextNodes);
+      }
+    }
+
+    walkTextNodes(content);
+  }
+
+  // 页面加载完成后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoLinkUrls);
+  } else {
+    autoLinkUrls();
+  }
+})();
+
+// 代码块增强功能
+(function() {
+  'use strict';
+
+  function enhanceCodeBlocks() {
+    var content = document.querySelector('.post-content');
+    if (!content) return;
+
+    var preBlocks = content.querySelectorAll('pre');
+    
+    preBlocks.forEach(function(pre) {
+      // 跳过已处理的代码块
+      if (pre.parentElement.classList.contains('code-block-wrapper')) return;
+
+      // 创建包装容器
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+
+      // 获取语言类型
+      var code = pre.querySelector('code');
+      var lang = '';
+      if (code && code.className) {
+        var match = code.className.match(/language-(\w+)/);
+        if (match) {
+          lang = match[1];
+          wrapper.classList.add('language-' + lang);
+        }
+      }
+
+      // 添加语言标签
+      if (lang) {
+        var langLabel = document.createElement('span');
+        langLabel.className = 'code-lang-label';
+        langLabel.textContent = lang;
+        wrapper.appendChild(langLabel);
+      }
+
+      // 创建复制按钮
+      var copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.textContent = '复制';
+      copyBtn.setAttribute('type', 'button');
+
+      // 复制功能
+      copyBtn.addEventListener('click', function() {
+        var textToCopy = code ? code.textContent : pre.textContent;
+        
+        navigator.clipboard.writeText(textToCopy).then(function() {
+          copyBtn.textContent = '已复制';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(function() {
+            copyBtn.textContent = '复制';
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        }).catch(function() {
+          // 降级方案
+          var textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          copyBtn.textContent = '已复制';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(function() {
+            copyBtn.textContent = '复制';
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+
+      // 组装DOM
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      wrapper.appendChild(copyBtn);
+    });
+  }
+
+  // 页面加载完成后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
+  } else {
+    enhanceCodeBlocks();
+  }
+})();
+
 // 文章目录自动生成功能
 (function() {
   'use strict';

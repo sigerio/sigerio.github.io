@@ -443,6 +443,100 @@ body {
   margin-bottom: 1rem;
 }
 
+/* 代码块容器样式 */
+.code-block-wrapper {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+}
+
+/* 复制按钮样式 */
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #abb2bf;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.copy-btn.copied {
+  background: #27ae60;
+  border-color: #27ae60;
+  color: #fff;
+}
+
+/* 命令行样式 */
+.code-block-wrapper.language-bash pre,
+.code-block-wrapper.language-shell pre,
+.code-block-wrapper.language-terminal pre,
+.code-block-wrapper.language-sh pre {
+  padding-left: 2rem;
+}
+
+.code-block-wrapper.language-bash::before,
+.code-block-wrapper.language-shell::before,
+.code-block-wrapper.language-terminal::before,
+.code-block-wrapper.language-sh::before {
+  content: "$";
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: #98c379;
+  font-family: "Fira Code", "Source Code Pro", monospace;
+  font-weight: bold;
+  z-index: 5;
+}
+
+/* 语言标签样式 */
+.code-lang-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #abb2bf;
+  font-size: 0.7rem;
+  border-radius: 8px 0 4px 0;
+  text-transform: uppercase;
+}
+
+/* 公式块样式 */
+.post-content .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.post-content .katex-display > .katex {
+  text-align: center;
+}
+
+.post-content .katex {
+  font-size: 1.1em;
+}
+
+/* 行内公式样式 */
+.post-content .katex:not(.katex-display .katex) {
+  padding: 0 0.1rem;
+}
+
 /* 页脚样式 */
 .site-footer {
   background: var(--primary-color);

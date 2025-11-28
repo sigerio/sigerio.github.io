@@ -2,6 +2,12 @@
 
 个人学习笔记博客，基于 Jekyll + GitHub Pages 构建。
 
+## 在线访问
+
+🔗 **博客地址**：[https://sigerio.github.io](https://sigerio.github.io)
+
+---
+
 ## 快速开始
 
 ### 1. 如何增加科目分类
@@ -93,6 +99,33 @@ toc: true
 | `category` | 是 | 分类标识 |
 | `tags` | 否 | 标签列表 |
 | `toc` | 否 | 是否显示目录，默认 `true` |
+
+---
+
+### 4. 如何添加图片
+
+**步骤：**
+1. 将图片放入 `assets/images/` 目录（如目录不存在请创建）
+2. 在文章中使用 Markdown 语法引用
+
+**语法：**
+
+| 类型 | 语法 |
+|------|------|
+| 基础图片 | `![描述](/assets/images/文件名.png)` |
+| 带标题 | `![描述](/assets/images/文件名.png "标题")` |
+| 指定宽度 | `<img src="/assets/images/文件名.png" width="500">` |
+
+**示例：**
+
+```markdown
+![网络拓扑图](/assets/images/network-topology.png)
+```
+
+**建议：**
+- 文件名使用英文或拼音，避免中文和空格
+- 推荐格式：PNG（截图/图表）、JPG（照片）、GIF（动图）
+- 大图建议压缩后上传，加快页面加载
 
 ---
 
