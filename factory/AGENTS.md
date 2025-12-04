@@ -1,4 +1,9 @@
 <!-- OPENSPEC:START -->
+# OpenSpec 指南
+
+这些指南适用于在本项目中工作的AI助手。
+
+
 本项目一定要遵循openspec规范开发。
 其他注意事项（下面的内容优先级最高，最高优先级，一定要遵守）:
 - 在`openspec`目录下新记录的.md文件，全部都得用中文描述
@@ -16,7 +21,7 @@ cunzhi工具使用细节：
 - 在没有明确通过使用 `cunzhi` 询问并得到可以完成任务/结束时，禁止主动结束对话/请求
 
 记忆管理使用细节：
-- 对话开始时查询 `回忆` 参数 `project_path` 为 git 的根目录，可以通过git rev-parse --show-toplevel获得,需要把`project_path`转换为wsl路径`\\wsl.localhost\Ubuntu-24.04\`
+- 对话开始时查询 `回忆` 参数 `project_path` 为 git 的根目录，可以通过git rev-parse --show-toplevel获得,需要把`project_path`转换为wsl路径`\\wsl.localhost\Ubuntu-22.04\`
 - 当发现用户输入"请记住："时，要对用户的消息进行总结后调用 `记忆` 的 add 功能添加记忆
 - 使用 `记忆` 的 add 功能添加新记忆（content + category: rule/preference/pattern/context）
 - 仅在重要变更时更新记忆，保持简洁
@@ -31,9 +36,21 @@ cunzhi工具使用细节：
 始终优先使用`github`来查看github上的源码、文件等等资料。
 始终优先使用`gitee`来查看gitee上的源码、文件等等资料。
 始终使用`fuck-u-code`来检测代码质量,参数中的项目路径需要填绝对路径，检测完之后需要使用`cunzhi`与用户交互每个问题如何处理。
-<!-- 始终使用`dbhub`来执行sql语句，来查询数据库。 -->
+始终使用`dbhub`来执行sql语句，来查询数据库。
 
 所有思考、总结都得用中文描述。
 
+
+当请求涉及以下内容时，请打开 `@/openspec/AGENTS.md`：
+- 提到规划或提案（如提案、规格、变更、计划等词汇）
+- 引入新功能、破坏性变更、架构调整或重大性能/安全工作
+- 表述模糊，需要在编码前参考权威规格说明
+
+使用 `@/openspec/AGENTS.md` 了解：
+- 如何创建和应用变更提案
+- 规格格式和约定
+- 项目结构和指南
+
+保留此托管块，以便 'openspec update' 可以刷新指南。
 
 <!-- OPENSPEC:END -->
