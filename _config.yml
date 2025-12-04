@@ -46,7 +46,7 @@ paginate_path: "/page:num/"
 exclude:
   - README.md
   - AGENTS.md
-  - openspec
+  - factory
   - .factory
 
 # 插件
