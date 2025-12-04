@@ -21,7 +21,7 @@ permalink: /:categories/:title/
 
 # 分类配置
 collections:
-  categories:
+  subjects:
     output: true
     permalink: /categories/:name/
 
