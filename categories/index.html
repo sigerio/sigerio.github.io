@@ -6,7 +6,7 @@ title: 全部分类
   <h1>全部分类</h1>
   
   <div class="category-list-full">
-    {% assign sorted_categories = site.categories | sort: "category_name" %}
+    {% assign sorted_categories = site.subjects | sort: "category_name" %}
     {% for cat_page in sorted_categories %}
     <section class="category-section">
       <h2>

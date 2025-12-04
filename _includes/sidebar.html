@@ -1,7 +1,7 @@
 <nav class="sidebar-nav">
   <h3>学科分类</h3>
   <ul class="category-list">
-    {% assign sorted_categories = site.categories | sort: "category_name" %}
+    {% assign sorted_categories = site.subjects | sort: "category_name" %}
     {% for cat_page in sorted_categories %}
     <li>
       <a href="{{ cat_page.url | relative_url }}">{{ cat_page.category_name }}</a>

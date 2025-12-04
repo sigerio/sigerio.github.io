@@ -34,7 +34,7 @@ defaults:
       layout: "post"
   - scope:
       path: ""
-      type: "categories"
+      type: "subjects"
     values:
       layout: "category"
 

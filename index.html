@@ -9,7 +9,7 @@ title: 首页
   <section class="categories-overview">
     <h2>学科分类</h2>
     <div class="category-cards">
-      {% assign sorted_categories = site.categories | sort: "category_name" %}
+      {% assign sorted_categories = site.subjects | sort: "category_name" %}
       {% for cat_page in sorted_categories %}
       <a href="{{ cat_page.url | relative_url }}" class="category-card">
         <h3>{{ cat_page.category_name }}</h3>
