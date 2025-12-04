@@ -193,12 +193,24 @@ body {
 }
 
 .post-category {
-  background: var(--accent-color);
-  color: white;
+  background: transparent;
+  color: var(--accent-color);
   padding: 0.2rem 0.5rem;
+  border: 1px solid var(--accent-color);
   border-radius: 4px;
   font-size: 0.75rem;
   margin-right: 0.5rem;
+  text-decoration: none;
+}
+
+.post-category:visited {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.post-category:hover {
+  background: var(--accent-color);
+  color: white;
 }
 
 .post-link {
