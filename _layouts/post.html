@@ -8,9 +8,7 @@ layout: default
       <div class="post-meta">
         <span class="post-date">{{ page.date | date: "%Y年%m月%d日" }}</span>
         {% if page.category %}
-        <span class="post-category">
-          <a href="{{ '/categories/' | append: page.category | relative_url }}">{{ page.category }}</a>
-        </span>
+        <a class="post-category" href="{{ '/categories/' | append: page.category | append: '/' | relative_url }}">{{ page.category }}</a>
         {% endif %}
       </div>
     </header>
