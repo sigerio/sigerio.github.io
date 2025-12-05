@@ -48,6 +48,8 @@ exclude:
   - AGENTS.md
   - factory
   - .factory
+  - .serena
+  - openspec
 
 # 插件
 plugins:
